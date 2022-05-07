@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import Counter from "./Components/Counter";
+import Profile from "./Components/Profile";
+import Todo from "./Components/Todo";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+    // update state component will re-render
+    state = {
+        show: false,
+    };
+    handleShow = () => {
+        // with this keyword we refer to the current state
+        this.setState({ show: !this.state.show });
+        console.log(this.state.show);
+    };
+
+    render() {
+        // View UI
+        return (
+            <div>
+                <button onClick={this.handleShow}>
+                    {this.state.show ? "Hide" : "Show"}
+                </button>
+                {/*Import Profile from Component */}
+                {this.state.show && <Profile />}
+                {/* if return profile else return  null */}
+                <Counter />
+                <Todo />
+            </div>
+        );
+    }
 }
-
-export default App;
